@@ -1,0 +1,19 @@
+---
+- hosts: localhost
+  gather_facts: no
+  connection: local
+
+  tasks:
+    - name: Upload text file
+      my_s3_module:
+        s3_bucket: mbloch
+        s3_prefix: hello.txt
+        local_dest: "{{ playbook_dir }}/hello.txt"
+        mode: upload
+
+    - name: Download text file
+      my_s3_module:
+        s3_bucket: mbloch
+        s3_prefix: hello.txt
+        local_dest: /tmp/hello2.txt
+        mode: download
